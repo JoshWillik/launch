@@ -1,14 +1,20 @@
 package main
 
 import (
+	"fmt"
 	"os"
 
 	"./config"
-	"./project"
+	// "./project"
 )
 
 func main() {
-	settings := config.ReadOrCreateSettings()
-	project := project.Discover(os.Getwd(), conf)
-	project.Launch()
+	dir, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	settings := config.Read(dir)
+	fmt.Println(settings)
+	// project := project.Discover(os.Getwd(), conf)
+	// project.Launch()
 }
